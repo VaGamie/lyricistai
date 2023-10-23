@@ -1,0 +1,45 @@
+$wrapper_width:70%;
+$screen_height: 100vh;
+
+body{
+    overflow-x: hidden;
+}
+
+
+//styling the wrapper/container
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-left: 0.6px solid gray;
+    width: $wrapper_width;
+    height: $screen_height;
+    justify-content: center;
+    background-color: #C0C0C0;
+}
+.wrapper h1{
+    position: relative;
+    background-color: red;
+    width: 400px;
+    height: 50px;
+}
+
+//Styling the menue bar. (the list that's at the left of the screen)
+.menuebar{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-color: red;
+    width:calc(100% - $wrapper_width);
+    height: $screen_height;
+}
+
+// (innerwrap) is what each page will have in common
+.innerwrap{
+    display: none;
+    position: relative;
+}
