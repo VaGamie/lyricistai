@@ -1,8 +1,11 @@
-$wrapper_width:70%;
+$wrapper_width:80%;
 $screen_height: 100vh;
-
+$size_when_screen_short: 76%;
+$sidemenue_color: #FFFF; // considering #a76dd1
+$rightside_color: #C0C0C0; // considering #36A3A4
 body{
     overflow-x: hidden;
+    background-color: $rightside_color;
 }
 
 
@@ -13,33 +16,256 @@ body{
     position: absolute;
     top: 0px;
     right: 0px;
-    border-left: 0.6px solid gray;
     width: $wrapper_width;
+    min-width: 200px;
     height: $screen_height;
     justify-content: center;
-    background-color: #C0C0C0;
+    background-color: $rightside_color;
 }
-.wrapper h1{
+
+
+//styling the search page of the website
+
+#search_page{
+    flex-direction: column;
     position: relative;
-    background-color: red;
-    width: 400px;
-    height: 50px;
+    height: 100vh;
+    width: 100%;
+    right: 0px;
+    padding: 30px 50px;
 }
+
+#search_page h1{
+    margin-left: 15px;
+}
+
+#search_page input{
+    border: 1.9px solid #a76dd1;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: none;
+    width: 85%;
+    height: 40px;
+    font-size: large;
+    background-color: rgb(243, 241, 224);
+
+}
+.search_input:focus{
+    outline: none;
+}
+
+
+.wrapper_searh_icon{
+    display: flex;
+    border: 1px solid #a76dd1;
+    border-right: none;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: rgb(243, 241, 224);
+    height: 42px;
+    width: 30px;
+    font-size: x-large;
+    justify-content: center;
+    align-items: center;
+}
+
+
+// Just the submit button
+
+#search_submit_button{
+    margin: 20px ;
+    margin-left: 15px;
+    width: 95px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #a76dd1;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+//styling both the seachbar and the search icon that's on the container/wrapper
+
+.seachbarNsearchI{
+    max-width: 400px;
+    min-width: 200px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+
 
 //Styling the menue bar. (the list that's at the left of the screen)
 .menuebar{
     display: flex;
     flex-direction: column;
-    position: relative;
+    position: fixed;
     top: 0px;
     left: 0px;
-    background-color: red;
+    z-index: 2;
+    box-shadow: 4px 1px 39px -5px rgba(97,96,96,0.75);
+-webkit-box-shadow: 4px 1px 39px -5px rgba(97,96,96,0.75);
+-moz-box-shadow: 4px 1px 39px -5px rgba(97,96,96,0.75);
+    border-right: 0.8px solid gray;
+    transition: 0.3s ease;
+    background-color: $sidemenue_color;
     width:calc(100% - $wrapper_width);
     height: $screen_height;
+    min-width: 120px;
+}
+
+//styling the letter a from the website name
+
+.a_span{
+    color: #a76dd1;
+}
+
+//styling the icons on the sidebar
+
+.side_buttons .side_icon{
+    display: flex;
+    position: relative;
+    align-self: left;
+    justify-self: left;
+    left: -10px;
+}
+
+.side_icon.history{
+    left: -13px;
+}
+
+//styling the website's name that's on the sidebar
+
+.webname_sidebar{
+    position: relative;
+    user-select: none;
+    cursor:default;
+    font-size:30px;
+    display: flex;
+    transition: .2s;
+    align-items: center;
+    left: 20px;
+    justify-content: left;
 }
 
 // (innerwrap) is what each page will have in common
 .innerwrap{
-    display: none;
     position: relative;
+    left: 0px;
+    height: 100%;
+    background: none;
+    display: none;
+}
+
+// These are the side buttons on the menue bar of our app
+
+.side_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: none;
+    width: 90%;
+    height: 40px;
+    font-size:larger;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style:normal;
+    transition: .2s ease-out;
+    margin: 10px auto;
+    cursor: pointer;
+    border: 0px;
+    border-radius: 8px;
+}
+
+.side_buttons::before{
+    position:absolute;
+    content: '';
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 8px;
+    left: 0px;
+    background-color:#a76dd1;
+    height: 100%;
+    opacity: 0;
+}
+
+.side_buttons:hover{
+    background-color: rgba(189, 189, 189, 0.613);
+}
+
+.side_buttons:hover::before{
+    animation: before_animation .9s linear ;
+    opacity: 1;
+}
+
+
+
+
+// Deleting soon
+
+.lst{
+    
+    position: relative;
+    margin: 10px auto;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .3s ease-in;
+
+}
+.lst:hover{
+    font-size: 20px;
+}
+#favorite_right{
+    flex-direction: column;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    right: 0px;
+    background-color: blue;
+}
+
+
+
+
+
+//adding animations to the website (side buttons)
+
+@keyframes before_animation {
+    from{
+        background-color: #6400ab;
+    }
+    to{
+        background-color: #a76dd1;
+    }
+}
+
+
+// adjusting the website's media which makes the we responsive
+@media (width <= 1170px) {
+    .wrapper{
+        width: $size_when_screen_short;
+    }
+    .menuebar{
+        width:calc(100% - $size_when_screen_short);
+
+    }
+}
+@media (width <= 670px){
+    .webname_sidebar{
+        font-size: 25px;
+        left: 6px;
+    }
+}
+
+@media (width <= 440px){
+    .webname_sidebar{
+        left: 3px;
+    } 
 }
