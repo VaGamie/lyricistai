@@ -85,6 +85,16 @@ class App extends React.Component{
             this.historyRef.current.style.display = "none"
             this.favoriteRef.current.style.display = "flex"
           }
+          if (e.state.section === 'search'){
+            this.searchRef.current.style.display = "flex"
+            this.historyRef.current.style.display = "none"
+            this.favoriteRef.current.style.display = "none"
+          }
+          if (e.state.section === 'history'){
+            this.searchRef.current.style.display = "none"
+            this.historyRef.current.style.display = "flex"
+            this.favoriteRef.current.style.display = "none"
+          }
         } else {
           console.log("nothing");
         }
