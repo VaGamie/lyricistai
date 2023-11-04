@@ -1,6 +1,7 @@
 $wrapper_width:80%;
 $screen_height: 100vh;
 $size_when_screen_short: 76%;
+$search_input_height: 40px;
 $sidemenue_color: #FFFF; // considering #a76dd1
 $rightside_color: #C0C0C0; // considering #36A3A4
 body{
@@ -44,8 +45,9 @@ body{
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     border-left: none;
+    background-color: red;
     width: 85%;
-    height: 40px;
+    height: $search_input_height;
     font-size: large;
     background-color: rgb(243, 241, 224);
 
@@ -61,12 +63,16 @@ body{
     border-right: none;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    background-color: rgb(243, 241, 224);
-    height: 42px;
-    width: 30px;
     font-size: x-large;
+    margin: 0px;
+    padding: 0px;
     justify-content: center;
     align-items: center;
+    
+    background-color: rgb(243, 241, 224);
+    width: 30px;
+    height: $search_input_height;
+
 }
 
 
@@ -228,8 +234,16 @@ body{
     height: 100vh;
     width: 100%;
     right: 0px;
-    background-color: blue;
 }
+
+
+//styling the loaidng animation of the page 
+
+.skeleton_animation{
+    width: 100vw;
+    height: 100vh;
+}
+
 
 
 
@@ -245,6 +259,7 @@ body{
         background-color: #a76dd1;
     }
 }
+
 
 
 // adjusting the website's media which makes the we responsive

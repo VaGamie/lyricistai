@@ -1,0 +1,11 @@
+const Switching_R = () =>{
+    return(
+    <div>
+        fbresd
+    </div>
+    );
+}
+
+
+
+export default Switching_R;
