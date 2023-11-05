@@ -9,6 +9,17 @@ body{
     background-color: $rightside_color;
 }
 
+//adjusting the scrollbar
+
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgb(255, 255, 255);
+}
+::-webkit-scrollbar-thumb{
+    background-color:#a76dd1;
+    border-radius: 5px;
+}
+
 
 //styling the wrapper/container
 .wrapper{
@@ -216,6 +227,8 @@ body{
     
     position: relative;
     margin: 10px auto;
+    width: 400px;
+    height: 250px;
     background-color: green;
     display: flex;
     flex-direction: column;
