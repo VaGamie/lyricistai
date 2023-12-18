@@ -4,6 +4,7 @@ $size_when_screen_short: 76%;
 $search_input_height: 40px;
 $sidemenue_color: #FFFF; // considering #a76dd1
 $rightside_color: #C0C0C0; // considering #36A3A4
+
 body{
     overflow-x: hidden;
     background-color: $rightside_color;
@@ -14,6 +15,7 @@ body{
 ::-webkit-scrollbar{
     width: 10px;
     background-color: rgb(255, 255, 255);
+
 }
 ::-webkit-scrollbar-thumb{
     background-color:#a76dd1;
@@ -44,6 +46,7 @@ body{
     height: 100vh;
     width: 100%;
     right: 0px;
+    display: block;
     padding: 30px 50px;
 }
 
@@ -82,7 +85,7 @@ body{
     
     background-color: rgb(243, 241, 224);
     width: 30px;
-    height: $search_input_height;
+    height: $search_input_height +2px;
 
 }
 
@@ -221,7 +224,6 @@ body{
 
 
 
-// Deleting soon
 
 .lst{
     
@@ -241,6 +243,18 @@ body{
 .lst:hover{
     font-size: 20px;
 }
+
+.lst_skeleton{
+    z-index: 99;
+    position: relative;
+    width: 400px;
+    height: 240px;
+    background-color: green;
+    display: flex;
+    flex-direction: 'column';
+}
+
+
 #favorite_right{
     flex-direction: column;
     position: absolute;
