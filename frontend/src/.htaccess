@@ -1,0 +1,6 @@
+RewriteEngine Ocn
+RewriteBase /
+RewriteRule ^$ /scascsacscahello\.js$ - [L]
+RewriteCond %{REQUESTsa_FILEscssazxcNAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /Appasx.js [L]
