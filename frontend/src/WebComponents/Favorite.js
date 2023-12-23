@@ -3,9 +3,13 @@ import React, {Component, useRef} from 'react'
 
 class Favorite extends Component{
     constructor(props){
-        super(props);
+        super(props); 
 
 
+    }
+
+    componentDidMount(){
+        console.log(this.props.favoriteforward.current)
     }
     render(){
         return(

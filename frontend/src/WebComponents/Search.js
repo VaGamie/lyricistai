@@ -6,13 +6,13 @@ class Search extends Component{
   constructor(props){
     super(props);
 
-
+    
     this.inputref = React.createRef()
 
   }
 
   componentDidMount(){
-    // console.log("this is searchforward" + this.props.searchforward)
+    console.log(this.props.searchforward.current)
   }
   handleSubmit = (e) =>{
     e.preventDefault()
@@ -25,6 +25,7 @@ class Search extends Component{
 
             <h1>Search</h1>
             <form onSubmit={this.handleSubmit}>
+              <Search />
               <div className='seachbarNsearchI'>
               <div className='wrapper_searh_icon'><FontAwesomeIcon icon={faSearch} className='side_icon' /></div>
                 <input 

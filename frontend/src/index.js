@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter as Router, Route, Switch, redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
 import Home from './WebComponents/home';
@@ -14,6 +14,7 @@ root.render(
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/dashboard" component={App} />
+        <Route path='/*' render={() => <h1>404: Page Not Found</h1>} />
       </Switch>
     </Router>
   </React.StrictMode>

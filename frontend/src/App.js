@@ -5,14 +5,12 @@ import React, {Component, useRef} from 'react'
 import {  faSearch, faHistory } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark} from '@fortawesome/free-regular-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'; // import Font Awesome CSS
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Search from './WebComponents/Search';
 import Favorite from './WebComponents/Favorite';
 import History from './WebComponents/History';
-import Home from './WebComponents/home'
-import { useState } from 'react';
+import FavoriteSkeleton from './WebComponents/favorite_skeleton';
 
 
 
@@ -22,7 +20,12 @@ class App extends Component{
     this.state = {
       loading: true,
       details: [],
-      input_value: ''
+      input_value: '',
+
+          // affecting the style of the search, history and favorite components
+      searchState: true,
+      historyState: false,
+      favoriteState: false
     }
     //this.change_path = this.change_path.bind(this)
 
@@ -31,6 +34,8 @@ class App extends Component{
     this.favoriteRef = React.createRef()
     this.historyRef = React.createRef()
     this.inputref = React.createRef()
+
+
   }
   
 
@@ -38,6 +43,7 @@ class App extends Component{
   
 
   search_visible = (e) =>{
+
     this.searchRef.current.style.display = "flex"
     // console.log("history ref is" + this.historyRef.current)
     this.historyRef.current.style.display = "none"
@@ -75,9 +81,9 @@ class App extends Component{
 
   change_path = (e) => {
     const path = e;
-    console.log( `e is ${e}` );
-    if (e === 'favorite') {
-      this.props.history.push(`/dashboard/${path}`);
+     if (e === 'favorite') {
+      window.history.pushState({section: path}, "", e)
+
       document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
   
       this.setState({loading: true}, async () => {
@@ -89,12 +95,23 @@ class App extends Component{
           });
         }).catch((e) => {console.log("Error fetching data", e)});
       });
-    } else {
-      this.props.history.push(`/dashboard/${path}`);
+    } else if (e === 'search') {
+      // make search component visible
+      this.searchRef.current.style.display = "flex";
+      this.historyRef.current.style.display = "none";
+      this.favoriteRef.current.style.display = "none";     
+      window.history.pushState({section: e}, "", e)
       document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
-    }
-  }
+    } else if (e === 'history') {
+    // make history component visible
+    this.searchRef.current.style.display = "none";
+    this.historyRef.current.style.display = "flex";
+    this.favoriteRef.current.style.display = "none";
+    window.history.pushState({section: e}, "", e)
+    document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
 
+  }
+  }
   
 
   async mounting(){
@@ -106,9 +123,7 @@ class App extends Component{
           details:data,
           
         });
-        this.searchRef.current.style.display = "none"
-        this.historyRef.current.style.display = "none"
-        this.favoriteRef.current.style.display = "flex"
+        // call favorite component
         console.log("Data retrieved succesfully!")
     } catch(err ){
       // this.setState({loading: false})
@@ -131,17 +146,7 @@ class App extends Component{
         if (e.state.section !== null) {
           console.log(e.state.section);
           if(e.state.section === 'favorite'){ 
-            
-      this.setState({loading: true}, async () => {
-        await this.mounting().then(() => {
-          this.setState({loading: false}, () => {
-            this.searchRef.current.style.display = "none"
-            this.historyRef.current.style.display = "none"
-            this.favoriteRef.current.style.display = "flex"
-          })
-  
-        }).catch((e) => {console.log("Error fetching data", e)})
-      })
+            this.favorite_visible()
           }
           if (e.state.section === 'search'){
             this.search_visible()
@@ -169,58 +174,61 @@ class App extends Component{
 
   // handelling the changing of path (what should be rendered when the user types in what path)
 
-  handlePath = (e) => {
-    const path = e
-    if (e === '/dashboard/favorite') {
-      console.log("Handle path at favorite")
-      console.log("it's mounting at", this.favoriteRef.current)
-      window.history.pushState({section: path}, "", e)
-      document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
+  // handlePath = (e) => {
+  //   const path = e
+  //   if (e === '/dashboard/favorite') {
+  //     console.log("Handle path at favorite")
+  //     console.log("it's mounting at", this.favoriteRef.current)
+  //     window.history.pushState({section: path}, "", e)
+  //     document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
 
 
-      this.setState({loading: true}, async () => {
-        await this.mounting().then(() => {
-          this.setState({loading: false}, () => {
-            this.searchRef.current.style.display = "none"
-            this.historyRef.current.style.display = "none"
-            this.favoriteRef.current.style.display = "flex"
-          })
+  //     this.setState({loading: true}, async () => {
+  //       await this.mounting().then(() => {
+  //         this.setState({loading: false}, () => {
+  //           this.searchRef.current.style.display = "none"
+  //           this.historyRef.current.style.display = "none"
+  //           this.favoriteRef.current.style.display = "flex"
+  //         })
   
-        }).catch((e) => {console.log("Error fetching data", e)})
-      })
+  //       }).catch((e) => {console.log("Error fetching data", e)})
+  //     })
 
-      // Imma be back
-    }
-    if(e === '/dashboard/search'){
-      this.searchRef.current.style.display = "flex"
-      this.historyRef.current.style.display = "none"
-      this.favoriteRef.current.style.display = "none"
-      window.history.pushState({section: path}, "", e)
-      document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
-    }
-    if(e === '/dashboard/history'){
-      this.searchRef.current.style.display = "none"
-      this.historyRef.current.style.display = "flex"
-      this.favoriteRef.current.style.display = "none"
-      window.history.pushState({section: e}, "", e)
-      document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
-    }
-    if (e === '/dashboard'){
-      this.searchRef.current.style.display = "flex"
-      this.historyRef.current.style.display = "none"
-      this.favoriteRef.current.style.display = "none"
-      window.history.pushState({section: path}, "", e)
-      document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
-    }
-  };
+  //     // Imma be back
+  //   }
+  //   if(e === '/dashboard/search'){
+  //     this.searchRef.current.style.display = "flex"
+  //     this.historyRef.current.style.display = "none"
+  //     this.favoriteRef.current.style.display = "none"
+  //     window.history.pushState({section: path}, "", e)
+  //     document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
+  //   }
+  //   if(e === '/dashboard/history'){
+  //     this.searchRef.current.style.display = "none"
+  //     this.historyRef.current.style.display = "flex"
+  //     this.favoriteRef.current.style.display = "none"
+  //     window.history.pushState({section: e}, "", e)
+  //     document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
+  //   }
+  //   if (e === '/dashboard'){
+  //     this.searchRef.current.style.display = "flex"
+  //     this.historyRef.current.style.display = "none"
+  //     this.favoriteRef.current.style.display = "none"
+  //     window.history.pushState({section: path}, "", e)
+  //     document.title = `${e[1].toUpperCase()+  e.slice(2).toLowerCase()} - Lyricize ai`
+  //   }
+  // };
 
   componentDidUpdate(){
-    console.log("it's updating at", this.historyRef.current)
+    console.log("it's updating at")
+    console.log(this.searchRef.current)
+    console.log(this.historyRef.current)
+    console.log(this.favoriteRef.current)
   }
   
   componentDidMount(){
-    console.log("it's mounting at", this.favoriteRef.current, this.historyRef.current, this.searchRef.current)
-    // console.log("search ref is", this.favoriteRef.current)
+    console.log("it's mounting at")
+
 
 
 
@@ -228,12 +236,12 @@ class App extends Component{
       loading: false,
     })
     this.onpop()
-    window.onload = () =>{
-      const path = window.location.pathname;
+    // window.onload = () =>{
+    //   const path = window.location.pathname;
       
-      console.log(`path name is ${path}`)
-      this.handlePath(path)
-    }
+    //   console.log(`path name is ${path}`)
+    //   this.change_path(path.replace('/dashboard/', ''))
+    // }
     
   }
 
@@ -244,24 +252,11 @@ class App extends Component{
     console.log(this.state.input_value)
   })
 
+
   render(){
   
-    const custom_skeleton = {
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'row',
-      zIndex: '1',
 
-    }
-    const text_skeleton = {
-      down: '-100px',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      position: 'relative',
-      display: 'flex',
-    }
+
 
     const favorite_B_blocker = {
       pointerEvents: 'none',
@@ -291,10 +286,7 @@ class App extends Component{
       <div className="wrapper">
         <div ref={this.favoriteRef}  id='favorite_right'>
 
-            <div className='lst_skeleton' >
-              {/* <Skeleton variant="circular" count={5}  style={custom_skeleton} width={400} height={250} /> */}
-              <Skeleton baseColor='gray'  animation='wave' count={2}  style={text_skeleton} width={400} height={20} />
-            </div>
+            <FavoriteSkeleton/>
           </div>
       </div>
 
@@ -316,23 +308,20 @@ class App extends Component{
   
               <div className="menuebar">
               <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2>
-              <button id='search'  className='side_buttons search'  data-page='search' onClick= {(e) => {this.search_visible(); this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
+              <button id='search'  className='side_buttons search'  data-page='search' onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite'onClick= {(e) => { this.change_path(e.currentTarget.id) }}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
-              <button id='history' className='side_buttons history'  data-page='history' onClick= {(e) => {this.history_visible(); this.change_path(e.currentTarget.id);}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
+              <button id='history' className='side_buttons history'  data-page='history' onClick= {(e) => { this.change_path(e.currentTarget.id);}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
 
               </div>
 
               <div className="wrapper">
-                <Search searchforward = {this.searchRef}/>
-                <Favorite favoriteforward = {this.favoriteRef} detailsforward = {this.state.details}/>
-                <History historyforward = {this.historyRef}/>
                 <Router>
                   <Switch>
                       <Route path='/dashboard/search' render={(props) => <Search {...props} searchforward = {this.searchRef} />} />
                       <Route path='/dashboard/favorite' render={(props) => <Favorite {...props} favoriteforward = {this.favoriteRef} detailsforward = {this.state.details}/>} />
                       <Route path='/dashboard/history' render={(props) => <History {...props} historyforward = {this.historyRef}/>} />
-                      <Route exact path='/dashboard' render = {() => <Redirect to='/dashboard/search' />} />
-                      <Route path='/*' render={() => <h1>404: Page Not Found</h1>} />
+                      <Route exact path='/dashboard' render = {() => <Redirect to='/dashboard/search'  />} />
+                      <Route path='/dashboard/*' render={() => <h1>404: Page Not Found</h1>} />
 
                   </Switch>
               </Router>
@@ -366,7 +355,7 @@ class App extends Component{
   };
 };
 }
-export default App;
+export default (App);
 
 
 

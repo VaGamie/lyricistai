@@ -6,9 +6,11 @@ class History extends Component{
     super(props);
 
   }
-
  
-  
+  componentDidMount(){
+    console.log(this.props.historyforward.current)
+  }
+
     render(){
       
         return(
