@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faSearch} from '@fortawesome/free-solid-svg-icons'
-import React, {Component, useRef} from 'react'
+import React, {Component} from 'react'
 
 class Search extends Component{
   constructor(props){
@@ -25,7 +25,6 @@ class Search extends Component{
 
             <h1>Search</h1>
             <form onSubmit={this.handleSubmit}>
-              <Search />
               <div className='seachbarNsearchI'>
               <div className='wrapper_searh_icon'><FontAwesomeIcon icon={faSearch} className='side_icon' /></div>
                 <input 

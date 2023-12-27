@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import React, {Component, useRef} from 'react'
 class History extends Component{

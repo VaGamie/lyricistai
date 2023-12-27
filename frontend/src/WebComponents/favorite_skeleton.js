@@ -24,7 +24,7 @@ class FavoriteSkeleton extends React.Component {
                 alighItems: 'center',
                 justifyContent: 'center',
                 transition: '.3s ease',
-                top: '320px auto',
+                top: '135px',
                 marginBottom: '10px',
         
             }
