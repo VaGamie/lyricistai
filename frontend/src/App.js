@@ -49,14 +49,17 @@ class App extends Component{
     const path = e;
     console.log("path is", path)
      if (e === 'favorite') {
-      window.history.pushState({section: path}, "", e)
 
+      this.props.history.push({
+        pathname: '/dashboard/favorite',
+        state: { section: path }
+      });
       document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
-  
+
       this.setState({loading: true}, async () => {
         await this.mounting().then(() => {
           this.setState({loading: false}, () => {
-            this.props.history.push('/dashboard/favorite')
+            console.log("Done mounting")
 
           });
         }).catch((e) => {console.log("Error fetching data", e)});
@@ -67,10 +70,13 @@ class App extends Component{
           this.setState({loading: false})
         }, 100);
       })
-      this.props.history.push('/dashboard/search')
 
-      window.history.pushState({section: path}, "", e)
+      this.props.history.push({
+        pathname: '/dashboard/search',
+        state: { section: path }
+      });
       document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
+
     } else if (e === 'history') {
     // make history component visible
     this.setState({loading: true}, () => {
@@ -78,8 +84,10 @@ class App extends Component{
         this.setState({loading: false})
       }, 100);
     })
-    window.history.pushState({section: path}, "", e)
-    this.props.history.push('/dashboard/history')
+    this.props.history.push({
+      pathname: '/dashboard/history',
+      state: { section: path }
+    });
     document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
 
   }
