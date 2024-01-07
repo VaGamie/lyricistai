@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faSearch} from '@fortawesome/free-solid-svg-icons'
 import React, {Component} from 'react'
-
+import axios from 'axios'
 class Search extends Component{
   constructor(props){
     super(props);
@@ -15,8 +15,28 @@ class Search extends Component{
     console.log(this.props.searchforward.current)
   }
   handleSubmit = (e) =>{
-    e.preventDefault()
+    if (this.inputref.current.value === ''){
+      e.preventDefault()
+    }
+    else{
+      e.preventDefault()
+      // stringifying the url
+      //    axios.get(`http://localhost:8000/add? url=${encodeURIComponent(this.inputref.current.value)}`)
+      axios.get(`http://localhost:8000/add`,{
+        params:{
+          url:this.inputref.current.value
+        }
+      })
+    .then(res => {
+      let data = res;
+      console.log(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
     this.inputref.current.value = ''
+    }
   }
   
     render(){

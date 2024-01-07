@@ -21,5 +21,6 @@ from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Dataview.as_view(), name='dataview')
+    path('', Dataview.as_view(), name='dataview'),
+    path('add/', include('app.urls')),
 ]
