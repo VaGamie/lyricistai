@@ -1,0 +1,45 @@
+$rightside_color: #C0C0C0; // considering #36A3A4
+
+
+body{
+    overflow-x: hidden;
+    background-color: $rightside_color;
+}
+
+.get_started_button {
+    //center the button
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 200px;
+    height: 60px;
+    background-color: #a76dd1;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 350px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// make animation when the button is clicked
+.get_started_button:active{
+    background-color: #a76dd1;
+    animation: before_animation .9s linear ;
+    opacity: 1;
+}
+
+
+@keyframes before_animation {
+    from{
+        background-color: #6400ab;
+    }
+    to{
+        background-color: #a76dd1;
+    }
+}

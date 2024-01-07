@@ -5,7 +5,7 @@ from .models import *
 from .serializer import *
 from rest_framework.response import Response
 import youtube_transcript_api
-import openai
+import openai 
 
 
 

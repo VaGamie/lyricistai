@@ -171,6 +171,17 @@ body{
     justify-content: left;
 }
 
+// styling the website's name but for the home page
+
+.webname_sidebar_for_home_page{
+    display: flex;
+    position: relative;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
 // (innerwrap) is what each page will have in common
 .innerwrap{
     position: relative;

@@ -120,30 +120,30 @@ class App extends Component{
 
   
 
-  onpop = () => {
-    window.onpopstate = async (e) => {
-      console.log("popstate event triggered!");
-      if (e.state !== null) { // Check if e.state is not null
-        console.log("state is :", e.state)
-        if (e.state.section !== null) {
-          console.log( "section is: ",e.state.section);
-          if(e.state.section === 'favorite'){ 
-            this.change_path('dashboard/favorite')
-          }
-          if (e.state.section === 'search'){
-            this.change_path('dashboard/search')
-          }
-          if (e.state.section === 'history'){
-          this.change_path('dashboard/history')
-          }
-        } else {
-          console.log("nothing");
-        }
-      } else {
-        console.log("State is null");
-      }
-    };
-  }
+  // onpop = () => {
+  //   window.onpopstate = async (e) => {
+  //     console.log("popstate event triggered!");
+  //     if (e.state !== null) { // Check if e.state is not null
+  //       console.log("state is :", e.state)
+  //       if (e.state.section !== null) {
+  //         console.log( "section is: ",e.state.section);
+  //         if(e.state.section === 'favorite'){ 
+  //           this.change_path('dashboard/favorite')
+  //         }
+  //         if (e.state.section === 'search'){
+  //           this.change_path('dashboard/search')
+  //         }
+  //         if (e.state.section === 'history'){
+  //         this.change_path('dashboard/history')
+  //         }
+  //       } else {
+  //         console.log("nothing");
+  //       }
+  //     } else {
+  //       console.log("State is null");
+  //     }
+  //   };
+  // }
 
   //preventing the page from reloading when button is pressed
   handleSubmit = (e) =>{
@@ -215,7 +215,7 @@ class App extends Component{
     this.setState({
       loading: false,
     })
-    this.onpop()
+    // this.onpop()
     window.onload = () =>{
       const path = window.location.pathname;
       
