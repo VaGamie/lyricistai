@@ -2,14 +2,16 @@ import './App.scss';
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, {Component, useRef} from 'react'
-import {  faSearch, faHistory } from '@fortawesome/free-solid-svg-icons'
+import {  faSearch, faHistory, faGear } from '@fortawesome/free-solid-svg-icons'
 import { faBookmark} from '@fortawesome/free-regular-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'; // import Font Awesome CSS
+
 import 'react-loading-skeleton/dist/skeleton.css'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Search from './WebComponents/Search';
 import Favorite from './WebComponents/Favorite';
 import History from './WebComponents/History';
+import Settings from './WebComponents/Settings';
 import FavoriteSkeleton from './WebComponents/favorite_skeleton';
 import { withRouter } from 'react-router-dom';
 
@@ -35,6 +37,7 @@ class App extends Component{
     this.favoriteRef = React.createRef()
     this.historyRef = React.createRef()
     this.inputref = React.createRef()
+    this.settingsRef = React.createRef()
 
 
   }
@@ -68,7 +71,7 @@ class App extends Component{
       this.setState({loading: true}, () => {
         setTimeout(() => {
           this.setState({loading: false})
-        }, 100);
+        }, 0.001);
       })
 
       this.props.history.push({
@@ -82,7 +85,7 @@ class App extends Component{
     this.setState({loading: true}, () => {
       setTimeout(() => {
         this.setState({loading: false})
-      }, 100);
+      }, 0.001);
     })
     this.props.history.push({
       pathname: '/dashboard/history',
@@ -90,8 +93,20 @@ class App extends Component{
     });
     document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
 
+  } else if (e === 'settings') {
+    // make history component visible
+    this.setState({loading: true}, () => {
+      setTimeout(() => {
+        this.setState({loading: false})
+      }, 0.001);
+    })
+    this.props.history.push({
+      pathname: '/dashboard/settings',
+      state: { section: path }
+    });
+    document.title = `${e[0].toUpperCase() + e.slice(1).toLowerCase()} - Lyricize ai`;
   }
-  }
+}
   
 
   async mounting(){
@@ -260,6 +275,8 @@ class App extends Component{
               <button id='search'  className='side_buttons search'  data-page='search' style={favorite_B_blocker} onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite' style={favorite_B_blocker} onClick= {(e)  => { this.change_path(e.currentTarget.id)}}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
               <button id='history' className='side_buttons history'  data-page='history' style={favorite_B_blocker} onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
+              {/* add settings button */}
+              <button id='settings' className='side_buttons settings'  data-page='settings' style={favorite_B_blocker}  onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faGear} className='side_icon settings' /><span>Settings</span></button>
 
       </div>
 
@@ -291,6 +308,8 @@ class App extends Component{
               <button id='search'  className='side_buttons search'  data-page='search' onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite'onClick= {(e)  => { this.change_path(e.currentTarget.id)}}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
               <button id='history' className='side_buttons history'  data-page='history' onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
+              <button id='settings' className='side_buttons settings'  data-page='settings' onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faGear } className='side_icon settings' /><span>Settings</span></button>
+
 
               </div>
 
@@ -300,6 +319,8 @@ class App extends Component{
                       <Route path='/dashboard/search' render={(props) => <Search {...props} searchforward = {this.searchRef} />} />
                       <Route path='/dashboard/favorite' render={(props) => <Favorite {...props} favoriteforward = {this.favoriteRef} detailsforward = {this.state.details}/>} />
                       <Route path='/dashboard/history' render={(props) =>  <History {...props} historyforward = {this.historyRef}/>} />
+                      <Route path = '/dashboard/settings' render={(props) => <Settings {...props} settingsforward = {this.settingsRef} />} />
+
                       <Route exact path='/dashboard' render = {() => <Redirect to='/dashboard/search'  />} />
                       <Route path='/dashboard/*' render={() => <h1>404: Page Not Found</h1>} />
 

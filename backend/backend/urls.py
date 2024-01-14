@@ -22,5 +22,7 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Dataview.as_view(), name='dataview'),
-    path('add/', include('app.urls')),
+    # path('add/', include('app.urls')),
+    path('login/', include('app.urls')),
+    path('login/', include('django.contrib.auth.urls'))
 ]

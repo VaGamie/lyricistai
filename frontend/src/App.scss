@@ -73,7 +73,7 @@ body{
 
 .wrapper_searh_icon{
     display: flex;
-    border: 1px solid #a76dd1;
+    border: 1.9px solid #a76dd1;
     border-right: none;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
@@ -283,7 +283,48 @@ body{
 
 
 
+//styling the settings page 
 
+.my_settings_text{
+    position: relative;
+    font-size: 30px;
+    margin: 20px auto;
+    left: 20px;
+    top: 20px;
+}
+.account_text{
+    position: relative;
+    margin: 20px auto;
+    left: 20px;
+    top: 20px;
+}
+.user_info{
+    position: relative;
+    margin: 20px auto;
+    left: 20px;
+    top: 20px;
+}
+.edit_account_info{
+    position: relative;
+    margin: 20px auto;
+    left: 20px;
+    top: 40px;
+    
+}
+.edit_account_info_button{
+    position: relative;
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #a76dd1;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.edit_account_info_button:active{
+    animation: before_animation .9s linear ;
+}
 
 
 //adding animations to the website (side buttons)

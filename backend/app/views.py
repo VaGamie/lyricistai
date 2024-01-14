@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from rest_framework import generics
 from rest_framework.views import APIView
 from .models import *
@@ -30,7 +31,6 @@ class Dataview(generics.ListCreateAPIView):
     #         youtube_id = youtube_url.split('=')[-1]
 
 
-youtube_api_key = 'AIzaSyD6aESl44eGtzEKlWrkrx4d_fxaBVByI7o'
 
 def index(request, name):
     url = request.GET.get('url', '')
