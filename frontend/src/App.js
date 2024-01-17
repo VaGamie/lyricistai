@@ -218,6 +218,10 @@ class App extends Component{
 
   componentDidUpdate(){
     console.log("Content updated")
+    // reload the page
+    // make the page reload only once
+
+    
 
   }
   
@@ -271,7 +275,7 @@ class App extends Component{
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <div
         className="menuebar">
-              <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2>
+              <a className='webname_a_tag_sidebar' href='/'> <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2> </a>
               <button id='search'  className='side_buttons search'  data-page='search' style={favorite_B_blocker} onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite' style={favorite_B_blocker} onClick= {(e)  => { this.change_path(e.currentTarget.id)}}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
               <button id='history' className='side_buttons history'  data-page='history' style={favorite_B_blocker} onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
@@ -304,7 +308,7 @@ class App extends Component{
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
               <div className="menuebar">
-              <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2>
+              <a className='webname_a_tag_sidebar' href='/'> <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2> </a>
               <button id='search'  className='side_buttons search'  data-page='search' onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite'onClick= {(e)  => { this.change_path(e.currentTarget.id)}}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
               <button id='history' className='side_buttons history'  data-page='history' onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
@@ -329,15 +333,7 @@ class App extends Component{
 
 
 
-                {/* <Router>
-                  <Switch>
-                    <Route exact path='/' component={Home}  />
-                    <Route path='/search' component={<Search searchforward = {this.searchRef} />} />
-                    <Route path='/favorite' component={<Favorite favoriteforward = {this.favoriteRef} detailsforward = {this.state.details}/>} />
-                    <Route path='/history' component={<History historyforward = {this.historyRef}/>} />
-                  </Switch>
 
-                </Router> */}
 
                 
                 

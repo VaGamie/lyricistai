@@ -161,14 +161,16 @@ body{
 
 .webname_sidebar{
     position: relative;
-    user-select: none;
-    cursor:default;
+    cursor:pointer;
+    height: 100%;
+    top: -25px;
+    width: 100%;
+    left: 0px;
+    right: 0px;
     font-size:30px;
     display: flex;
-    transition: .2s;
     align-items: center;
-    left: 20px;
-    justify-content: left;
+    justify-content: center;
 }
 
 // styling the website's name but for the home page
@@ -180,6 +182,17 @@ body{
     align-items: center;
     justify-content: center;
     
+}
+
+.webname_a_tag_sidebar{
+    left: 10px;
+    position: relative;
+    width: 70%;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
 }
 
 // (innerwrap) is what each page will have in common
@@ -349,16 +362,43 @@ body{
         width:calc(100% - $size_when_screen_short);
 
     }
+    
 }
-@media (width <= 670px){
-    .webname_sidebar{
-        font-size: 25px;
-        left: 6px;
+
+
+@media (width <= 850px){
+    .webname_a_tag_sidebar{
+        width: 85%;
+    }
+
+}
+
+@media (width <= 800px){
+    .webname_a_tag_sidebar{
+        width: 90%;
     }
 }
 
-@media (width <= 440px){
+@media (width <= 670px){
+    .webname_a_tag_sidebar{
+        font-size: 25px;
+        left: 0px;
+        width: 95%;
+    }
+}
+
+
+@media (width <= 605px){
+    .webname_a_tag_sidebar{
+        font-size: 20px;
+        left: 0px;
+        width: 100%;
+    }
+}
+
+@media (width <= 570px){
     .webname_sidebar{
-        left: 3px;
+        left: 0;
+        font-size: 24px;
     } 
 }
