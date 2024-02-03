@@ -4,6 +4,8 @@ $rightside_color: #C0C0C0; // considering #36A3A4
 body{
     overflow-x: hidden;
     background-color: $rightside_color;
+    align-items: center;
+    justify-items: center;
 }
 
 .get_started_button {
@@ -25,12 +27,20 @@ body{
     align-items: center;
 }
 
+.get_started_a_tag{
+    text-decoration: none;
+    
+}
+
+
 // make animation when the button is clicked
 .get_started_button:active{
     background-color: #a76dd1;
     animation: before_animation .9s linear ;
     opacity: 1;
 }
+
+
 
 
 
@@ -61,6 +71,7 @@ body{
     margin-right: 20px;
     top: 10px;
     padding: 10px;
+    // transition: 0.3s ease-in-out;
     border: 3px solid #a76dd1;
     border-radius: 5px;
     justify-content: center;
@@ -74,6 +85,7 @@ body{
     position: relative;
     display: flex;
     flex-direction: column;
+    transition: 0.3s ease-in-out;
     width: 350px;
     height: 300px;
     // put it at the further right of the screen
@@ -103,12 +115,30 @@ body{
 @media (max-width: 800px) {
     .home_page_boxes_div{
         height: 800px;
+        align-items: center;
+        justify-content: center;
     }
     .our_mission_div{
+
         margin-top: 0px;
         margin-bottom: 0px;
     }
     .how_it_works_div{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+@media (max-width: 415px) {
+    .our_mission_div{
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .how_it_works_div{
+        // background-color: blue;
+        left: -10px;
         margin-top: 0px;
         margin-bottom: 0px;
     }

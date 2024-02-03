@@ -1,5 +1,5 @@
 $wrapper_width:80%;
-$screen_height: 100vh;
+$screen_height: 100%;
 $size_when_screen_short: 76%;
 $search_input_height: 40px;
 $sidemenue_color: #FFFF; // considering #a76dd1
@@ -401,4 +401,22 @@ body{
         left: 0;
         font-size: 24px;
     } 
+}
+
+@media (width <= 450px){
+    .webname_sidebar_for_home_page{
+        font-size: 30px;
+    }
+}
+
+@media (width <= 350px){
+    .webname_sidebar_for_home_page{
+        font-size: 20px;
+    }
+}
+
+@media (width <= 250px){
+    .webname_sidebar_for_home_page{
+        font-size: 12px;
+    }
 }
