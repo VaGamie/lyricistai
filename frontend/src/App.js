@@ -2,7 +2,7 @@ import './App.scss';
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, {Component, useRef} from 'react'
-import {  faSearch, faHistory, faGear } from '@fortawesome/free-solid-svg-icons'
+import {  faSearch, faHistory, faGear, faCaretDown} from '@fortawesome/free-solid-svg-icons'
 import { faBookmark} from '@fortawesome/free-regular-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'; // import Font Awesome CSS
 
@@ -263,6 +263,16 @@ class App extends Component{
     const loading_cursor = {
       cursor: 'progress'
     }
+    const website_name = {
+      position: 'absolute',
+      margin: '0px',
+      top: '10px',
+      padding: '0px',
+      fontSize: '34px',
+    }
+    const name_span = {
+      color: '#a76dd1'
+    }
     
     if (this.state.loading){
       console.log("Currently Loading")
@@ -303,10 +313,38 @@ class App extends Component{
 
     return (
       
+      
 
       <div className="App" >
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
+              {/* navbar */}
+              <div className='navbar'>
+                {/* <a className='webname_a_tag' href='/'> <h2 className='webname'>Lyri</h2></a> */}
+                <a href='/'> <h2 style={website_name} > Lyri<span style={name_span} >cize a</span><span>i</span></h2> </a>
+                <div className='navbar_icons'>
+                  <a className='navebar_search_logo'  onClick= {(e) => { this.change_path('search'); }}><FontAwesomeIcon icon={faSearch} className='search_icon' /></a>
+                  <a className='navebar_favorite_logo'  onClick= {(e) => { this.change_path('favorite'); }}><FontAwesomeIcon icon={faBookmark} className='favorite_icon' /></a>
+                  <a className='navebar_history_logo'  onClick= {(e) => { this.change_path('history'); }}><FontAwesomeIcon icon={faHistory} className='search_icon' /></a>
+                </div>
+                
+                {/* making an avatar button  */}
+                
+                <div className='avatar'>
+                  <div className='avatar_circle'>
+                    <img  src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' className='avatar_img'></img>
+                  </div>
+                  <div className='avatar_dropdown'><FontAwesomeIcon icon = {faCaretDown}></FontAwesomeIcon></div>
+                  <div className='avatar_dropdown_content'>
+                    <a className='manage_account' onClick= {(e) => { this.change_path('settings'); }}>Manage account</a>
+                    <a className='sign_out'>Sign out</a>
+                  </div>
+                </div>
+
+              </div>
+
+
+              {/* sidebar */}
               <div className="menuebar">
               <a className='webname_a_tag_sidebar' href='/'> <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2> </a>
               <button id='search'  className='side_buttons search'  data-page='search' onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
