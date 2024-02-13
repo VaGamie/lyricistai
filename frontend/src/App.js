@@ -14,16 +14,22 @@ import History from './WebComponents/History';
 import Settings from './WebComponents/Settings';
 import FavoriteSkeleton from './WebComponents/favorite_skeleton';
 import { withRouter } from 'react-router-dom';
-
+import image from '../src/profile_img/defaultt.jpg'
 
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state = {
+      validation: false,
       loading: true,
       details: [],
       input_value: '',
+      screen_width: window.innerWidth,
+
+      // determins whether the user clicked on the avtar button
+      avatar_validation: false,
+
 
           // affecting the style of the search, history and favorite components
       searchState: true,
@@ -38,7 +44,14 @@ class App extends Component{
     this.historyRef = React.createRef()
     this.inputref = React.createRef()
     this.settingsRef = React.createRef()
-
+    this.menueref = React.createRef()
+    this.sidebarref = React.createRef()
+    this.bar1ref = React.createRef()
+    this.bar2ref = React.createRef()
+    this.bar3ref = React.createRef()
+    this.avatarRef = React.createRef()
+    this.dropdown_iconRef = React.createRef()
+    this.avatarcircleRef = React.createRef()
 
   }
   
@@ -130,6 +143,45 @@ class App extends Component{
   }
 
   
+  
+
+  menuecontrol = () => {
+    let sidebar = this.sidebarref.current;
+    console.log("sidebar is", sidebar)
+    
+    
+
+    if (this.state.validation === true){
+      sidebar.style.display = 'none';
+      this.setState({validation: false})
+      console.log("sidebar was set to none")
+      console.log("validation (from first click) is", this.state.validation)
+      this.bar2ref.current.style.width = '43px';
+      this.bar3ref.current.style.width = '43px';
+    }else{
+      this.bar2ref.current.style.width = '33px';
+      this.bar3ref.current.style.width = '23px';
+      sidebar.style.display = 'flex';
+      this.setState({validation: true})
+      console.log("sidebar was set to flex")
+      console.log("validation (from second click) is", this.state.validation)
+    }
+
+    // checking to see if the user clicks outside the sidebar
+    window.addEventListener('mouseup', (e) => {
+      if (e.target !== this.sidebarref.current && e.target !== this.menueref.current){
+        if (this.state.validation === true){
+          sidebar.style.display = 'none';
+          this.setState({validation: false})
+          console.log("sidebar was set to none")
+          console.log("validation is (from even)", this.state.validation)
+          this.bar2ref.current.style.width = '43px';
+          this.bar3ref.current.style.width = '43px';
+        }
+      }
+    })
+  }
+  
 
  
 
@@ -165,6 +217,8 @@ class App extends Component{
     e.preventDefault()
     this.inputref.current.value = ''
   }
+
+
 
 
   
@@ -227,6 +281,8 @@ class App extends Component{
   
   componentDidMount(){
     console.log("Content mounted")
+    this.screen_width_track()
+
 
 
 
@@ -242,7 +298,97 @@ class App extends Component{
       this.change_path(path.replace('/dashboard/', ''))
     }
     
+
+  this.screensize()
+  // this.avatar_click()
+
+  console.log(`${this.avatarRef.current} is the avatar ref`)
+      
   }
+
+  // component ends here
+
+  screensize = () => {
+    if (this.state.screen_width > 670){
+      // console.log(this.state.validation)
+
+     if (this.bar2ref.current != null && this.bar3ref.current != null){
+      this.bar2ref.current.style.width = '43px';
+      this.bar3ref.current.style.width = '43px';
+      }
+      if (this.state.validation === true){
+        this.sidebarref.current.style.display = 'none';
+        this.setState({validation: false})
+      }
+
+    }
+
+    // checking avatar validation (wasn't supposed to use this function but don't want to create a new function for it)
+
+    if (this.avatarRef.current != null){
+      if (this.state.avatar_validation === false){
+        this.avatarRef.current.style.display = 'none'
+        this.dropdown_iconRef.current.style.display = 'none'
+      }
+    }
+
+    setTimeout(() => {
+      this.screensize()
+    }, 1)
+
+
+
+    
+  }
+
+  screen_width_track = () => {
+    if(this.state.screen_width !== window.innerWidth){
+      this.setState({screen_width: window.innerWidth})
+    }
+    // console.log(`Screen size is ${this.state.screen_width}`)
+    setTimeout(() => {
+      this.screen_width_track()
+    }, 1)
+  }
+
+  // avatar button click
+
+  avatar_click = () => {
+    let dropdown = this.avatarRef.current
+    let dropdown_icon = this.dropdown_iconRef.current
+    if (dropdown != null){
+      if (this.state.avatar_validation === false){
+        dropdown.style.display = 'flex'
+        dropdown_icon.style.display = 'flex'
+        this.setState({avatar_validation: true})
+        // console.log("avatar button clicked 2")
+  
+      }else{
+        dropdown.style.display = 'none'
+        dropdown_icon.style.display = 'none'
+        this.setState({avatar_validation: false})
+
+        console.log("validation turned to false")
+      }
+    }
+    // close it when the user clicks outside the dropdown
+    window.addEventListener('mouseup', (e) => {
+      console.log(e.target !== dropdown && e.target !== this.avatarcircleRef.current )
+      console.log(this.state.avatar_validation + 'is validation')
+      if (e.target !== dropdown && e.target !== this.avatarcircleRef.current){
+        if (this.state.avatar_validation === true){
+          dropdown.style.display = 'none'
+          dropdown_icon.style.display = 'none'
+          this.setState({avatar_validation: false})
+          console.log("avatar button clicked (from event)")
+        }
+      }
+      
+      
+    })
+    
+  }
+
 
   //updating the input value on change
 
@@ -264,6 +410,7 @@ class App extends Component{
       cursor: 'progress'
     }
     const website_name = {
+      transition: '0.5s ease',
       position: 'absolute',
       margin: '0px',
       top: '10px',
@@ -284,7 +431,7 @@ class App extends Component{
     <div className="App" style={loading_cursor}>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <div
-        className="menuebar">
+        className="menuebar" >
               <a className='webname_a_tag_sidebar' href='/'> <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2> </a>
               <button id='search'  className='side_buttons search'  data-page='search' style={favorite_B_blocker} onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite' style={favorite_B_blocker} onClick= {(e)  => { this.change_path(e.currentTarget.id)}}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
@@ -321,23 +468,31 @@ class App extends Component{
               {/* navbar */}
               <div className='navbar'>
                 {/* <a className='webname_a_tag' href='/'> <h2 className='webname'>Lyri</h2></a> */}
-                <a href='/'> <h2 style={website_name} > Lyri<span style={name_span} >cize a</span><span>i</span></h2> </a>
+                <a href='/'> <h2 className='webname_navbar' style={website_name} > Lyri<span style={name_span} >cize a</span><span>i</span></h2> </a>
                 <div className='navbar_icons'>
                   <a className='navebar_search_logo'  onClick= {(e) => { this.change_path('search'); }}><FontAwesomeIcon icon={faSearch} className='search_icon' /></a>
                   <a className='navebar_favorite_logo'  onClick= {(e) => { this.change_path('favorite'); }}><FontAwesomeIcon icon={faBookmark} className='favorite_icon' /></a>
                   <a className='navebar_history_logo'  onClick= {(e) => { this.change_path('history'); }}><FontAwesomeIcon icon={faHistory} className='search_icon' /></a>
                 </div>
+
+
+                {/* making menue bar */}
+                <div onClick={this.menuecontrol} ref={this.menueref} className='menuebar_mobile'>
+                  <div className='bar1' ref={this.bar1ref}></div>
+                  <div className='bar2' ref={this.bar2ref}></div>
+                  <div className='bar3' ref={this.bar3ref}></div>
+                </div>
                 
                 {/* making an avatar button  */}
                 
                 <div className='avatar'>
-                  <div className='avatar_circle'>
-                    <img  src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' className='avatar_img'></img>
+                  <div  onClick={this.avatar_click} className='avatar_circle'>
+                    <img ref={this.avatarcircleRef}  src= {image} alt='avatar' className='avatar_img'></img>
                   </div>
-                  <div className='avatar_dropdown'><FontAwesomeIcon icon = {faCaretDown}></FontAwesomeIcon></div>
-                  <div className='avatar_dropdown_content'>
+                  <div ref={this.dropdown_iconRef} className='avatar_dropdown'><FontAwesomeIcon icon = {faCaretDown}></FontAwesomeIcon></div>
+                  <div ref={this.avatarRef} className='avatar_dropdown_content'>
                     <a className='manage_account' onClick= {(e) => { this.change_path('settings'); }}>Manage account</a>
-                    <a className='sign_out'>Sign out</a>
+                    <a id='sign_out'>Sign out</a>
                   </div>
                 </div>
 
@@ -345,16 +500,16 @@ class App extends Component{
 
 
               {/* sidebar */}
-              <div className="menuebar">
-              <a className='webname_a_tag_sidebar' href='/'> <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2> </a>
+              <div className="menuebar" ref={this.sidebarref}>
+              {/* <a className='webname_a_tag_sidebar' href='/'> <h2 className='webname_sidebar'>Lyri<span className='a_span'>cize a</span><span>i</span></h2> </a> */}
               <button id='search'  className='side_buttons search'  data-page='search' onClick= {(e) => { this.change_path(e.currentTarget.id); }} ><FontAwesomeIcon icon={faSearch} className='side_icon' /><span>Search</span></button>
               <button id='favorite' className='side_buttons favorite' data-page='favorite'onClick= {(e)  => { this.change_path(e.currentTarget.id)}}><FontAwesomeIcon icon={faBookmark} className='side_icon' /><span>Favorite</span></button>
               <button id='history' className='side_buttons history'  data-page='history' onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faHistory} className='side_icon history' /><span>History</span></button>
-              <button id='settings' className='side_buttons settings'  data-page='settings' onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faGear } className='side_icon settings' /><span>Settings</span></button>
+              {/* <button id='settings' className='side_buttons settings'  data-page='settings' onClick= {(e) => { this.change_path(e.currentTarget.id)}} ><FontAwesomeIcon icon={faGear } className='side_icon settings' /><span>Settings</span></button> */}
 
 
               </div>
-
+                
               <div className="wrapper">
                 <Router>
                   <Switch>
