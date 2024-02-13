@@ -15,28 +15,9 @@ class Search extends Component{
     console.log(this.props.searchforward.current)
   }
   handleSubmit = (e) =>{
-    if (this.inputref.current.value === ''){
-      e.preventDefault()
-    }
-    else{
-      e.preventDefault()
-      // stringifying the url
-      //    axios.get(`http://localhost:8000/add? url=${encodeURIComponent(this.inputref.current.value)}`)
-      axios.get(`http://localhost:8000/add`,{
-        params:{
-          url:this.inputref.current.value
-        }
-      })
-    .then(res => {
-      let data = res;
-      console.log(data);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    e.preventDefault()
+    alert("Site still in development, please come later when the site is fully functional!")
 
-    this.inputref.current.value = ''
-    }
   }
   
     render(){
@@ -52,7 +33,7 @@ class Search extends Component{
                   onChange={this.handleChange}
                   className='search_input'
                   placeholder= "Search via URL"// <FontAwesomeIcon icon={faSearch} className='side_icon' />
-                  type='url' 
+                  type='text' 
                 ></input>
               </div>
               <button  type='submit' id='search_submit_button' > Search</button>
