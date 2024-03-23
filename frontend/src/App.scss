@@ -43,15 +43,15 @@ body{
 
 //styling the search page of the website
 
-// #search_page{
-//     flex-direction: column;
-//     position: relative;
-//     height: 100vh;
-//     width: 100%;
-//     right: 0px;
-//     display: block;
-//     padding: 30px 50px;
-// }
+#search_page{
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    right: 0px;
+    display: block;
+    padding: 30px 50px;
+}
 
 #search_page h1{
     margin-left: 15px;
@@ -123,11 +123,10 @@ body{
 
 //Styling the menue bar. (the list that's at the left of the screen)
 .menuebar{
-    padding: 10px;
     display: none;
     flex-direction: column;
-    position: absolute;
-    top: $navbar_height + 5px;
+    position: fixed;
+    top: 0px;
     left: 0px;
     z-index: 2;
     box-shadow: 4px 1px 39px -5px rgba(97,96,96,0.75);
@@ -136,9 +135,7 @@ body{
     border-right: 0.8px solid gray;
     transition: 0.3s ease;
     background-color: $sidemenue_color;
-    width:calc(25%);
-    max-width:150px;
-
+    width:calc(100% - $wrapper_width);
     height: $screen_height;
     min-width: 120px;
 }
@@ -217,7 +214,7 @@ body{
     align-items: center;
     position: relative;
     background: none;
-    width: 100%;
+    width: 90%;
     height: 40px;
     font-size:larger;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -274,7 +271,7 @@ body{
 // stling the icons in the navbar
 
 .navbar_icons{
-    position: absolute;
+    position: relative;
     display: flex;
     min-width: 250px;
     height: 100%;
@@ -292,51 +289,15 @@ body{
     font-size: 30px;
 }
 
-//styling the menue bar
-
-.menuebar_mobile{
-    display: block;
-    position: absolute;
-    // top: 50%;
-    align-self: center;
-    align-items: center;
-    margin-left: 10px;
-    width: 43px;
-    height: 60%;
-    z-index: 999;
-    cursor: pointer;
-    transition: .3s ease-in;
-
-}
-
-
-.menuebar_mobile div{
-    position: relative;
-    transition: 0.3s ease-in-out;
-    margin: 5px 0px;
-    width: 100%;
-    height: 7px;
-    border-radius: 30px;
-    color: black;
-    background-color: black;
-    pointer-events: none;
-}
-
-.bar1{
-    margin-top: 0px;
-    top: 0px;
-}
-
-
-
 .avatar{
     display: flex;
     margin-right: 10px;
     flex-direction: column;
-    position: absolute;
+    position: relative;
     z-index: 999;
-    top: 10px;
-    left: 80%;
+    top: 17px;
+    left: 60%;
+    align-self: center;
     // background-color: red;
     width: 60px;
     height: 80px;
@@ -355,16 +316,15 @@ body{
     justify-content: center;
     transition: .3s ease-in;
 }
-// .avatar_circle:hover + .avatar_dropdown {
-//     display: block;
-// }
+.avatar_circle:hover + .avatar_dropdown {
+    display: block;
+}
 .avatar_circle:active{
     outline: 2px solid #a76dd1;
 }
 
 .avatar_img{
     width: 50px;
-    top: 0px;
     height: 50px;
     border-radius: 50%;
     align-self: center;
@@ -383,40 +343,34 @@ body{
 } 
 
 .avatar_dropdown_content{
-    display: none;
+    display: flex;
     flex-direction: column;
+    position: relative;
     width: 200px;
     height: 500px;
     background-color: #3f3e3e;
+    align-items: center;
     border-radius: 10px;
     align-self: center;
-    align-items: center;
-    justify-content: center;
     transition: .3s ease-in;
     bottom: 0px;
-    padding: 10px auto;
 
 }
 
 .avatar_dropdown_content a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     align-self: center;
     height: 50px;
     align-items: center;
     justify-self: center;
     position: relative;
+    margin: 20px 0px;
     font-size: 20px;
     color: white;
     text-decoration: none;
     transition: .3s ease-in;
-    margin-top: 20px;
 
-}
-#sign_out{
-    margin-bottom: 20px;
+
 }
 
 .avatar_dropdown_content a:hover{
@@ -548,7 +502,6 @@ body{
         width: 85%;
     }
 
-
 }
 
 @media (width <= 800px){
@@ -557,33 +510,11 @@ body{
     }
 }
 
-@media (width >= 670px){
-    // .menuebar{
-    //     display: none;
-
-    // }
-    .menuebar_mobile{
-        display: none;
-    }
-}
-
 @media (width <= 670px){
     .webname_a_tag_sidebar{
         font-size: 25px;
         left: 0px;
         width: 95%;
-    }
-    .navbar_icons{
-        display: none;
-        
-    }
-    .avatar{
-        left: 65%;
-    }
-
-
-    .webname_navbar{
-        left: 15%;
     }
 }
 
@@ -597,7 +528,9 @@ body{
 }
 
 @media (width <= 570px){
-
+    .wrapper{
+        width: $size_when_screen_short;
+    }
     .webname_sidebar{
         left: 0;
         font-size: 24px;
