@@ -34,7 +34,7 @@ class Home extends React.Component{
           </div>
           
 
-          <a href='/dashboard/search'><button  className='get_started_button'>Get started</button></a>
+          <a className='get_started_a_tag' href='/dashboard/search'><button  className='get_started_button'>Get started</button></a>
           
       </div>
     )

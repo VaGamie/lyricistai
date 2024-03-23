@@ -1,5 +1,8 @@
-$wrapper_width:80%;
-$screen_height: 100vh;
+$wrapper_width: 100%;
+$wrapper_width_after_menue:80%;
+$navbar_height: 68px;
+$navbar_width: 100%;
+$screen_height: 100%;
 $size_when_screen_short: 76%;
 $search_input_height: 40px;
 $sidemenue_color: #FFFF; // considering #a76dd1
@@ -28,27 +31,27 @@ body{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 0px;
-    right: 0px;
-    width: $wrapper_width;
+    top: $navbar_height + 5px;
+    left: 0px;
+    width: 100%;
     min-width: 200px;
     height: $screen_height;
     justify-content: center;
-    background-color: $rightside_color;
+    background-color: blue;
 }
 
 
 //styling the search page of the website
 
-#search_page{
-    flex-direction: column;
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    right: 0px;
-    display: block;
-    padding: 30px 50px;
-}
+// #search_page{
+//     flex-direction: column;
+//     position: relative;
+//     height: 100vh;
+//     width: 100%;
+//     right: 0px;
+//     display: block;
+//     padding: 30px 50px;
+// }
 
 #search_page h1{
     margin-left: 15px;
@@ -120,10 +123,11 @@ body{
 
 //Styling the menue bar. (the list that's at the left of the screen)
 .menuebar{
-    display: flex;
+    padding: 10px;
+    display: none;
     flex-direction: column;
-    position: fixed;
-    top: 0px;
+    position: absolute;
+    top: $navbar_height + 5px;
     left: 0px;
     z-index: 2;
     box-shadow: 4px 1px 39px -5px rgba(97,96,96,0.75);
@@ -132,7 +136,9 @@ body{
     border-right: 0.8px solid gray;
     transition: 0.3s ease;
     background-color: $sidemenue_color;
-    width:calc(100% - $wrapper_width);
+    width:calc(25%);
+    max-width:150px;
+
     height: $screen_height;
     min-width: 120px;
 }
@@ -211,7 +217,7 @@ body{
     align-items: center;
     position: relative;
     background: none;
-    width: 90%;
+    width: 100%;
     height: 40px;
     font-size:larger;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -246,6 +252,176 @@ body{
 
 
 
+// styling the navbar of the website
+
+.navbar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: $navbar_width;
+    height: $navbar_height;
+    // background-color: red;
+    align-content: center;
+    display: flex;
+    box-shadow: 0px 4px 11px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 11px -3px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 11px -3px rgba(0,0,0,0.75);;
+    flex-direction: row;
+ 
+}
+
+
+// stling the icons in the navbar
+
+.navbar_icons{
+    position: absolute;
+    display: flex;
+    min-width: 250px;
+    height: 100%;
+    // background-color: red;
+    align-items: center;
+    left: 40%;
+    transition: .3s ease-in;
+}
+
+.navbar a{
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    margin: 0px 25px;
+    font-size: 30px;
+}
+
+//styling the menue bar
+
+.menuebar_mobile{
+    display: block;
+    position: absolute;
+    // top: 50%;
+    align-self: center;
+    align-items: center;
+    margin-left: 10px;
+    width: 43px;
+    height: 60%;
+    z-index: 999;
+    cursor: pointer;
+    transition: .3s ease-in;
+
+}
+
+
+.menuebar_mobile div{
+    position: relative;
+    transition: 0.3s ease-in-out;
+    margin: 5px 0px;
+    width: 100%;
+    height: 7px;
+    border-radius: 30px;
+    color: black;
+    background-color: black;
+    pointer-events: none;
+}
+
+.bar1{
+    margin-top: 0px;
+    top: 0px;
+}
+
+
+
+.avatar{
+    display: flex;
+    margin-right: 10px;
+    flex-direction: column;
+    position: absolute;
+    z-index: 999;
+    top: 10px;
+    left: 80%;
+    // background-color: red;
+    width: 60px;
+    height: 80px;
+    transition: .3s ease-in;
+}
+
+.avatar_circle{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: #a76dd1;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    transition: .3s ease-in;
+}
+// .avatar_circle:hover + .avatar_dropdown {
+//     display: block;
+// }
+.avatar_circle:active{
+    outline: 2px solid #a76dd1;
+}
+
+.avatar_img{
+    width: 50px;
+    top: 0px;
+    height: 50px;
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    transition: .3s ease-in;
+}
+
+.avatar_dropdown{
+    display: none;
+    align-self: center;
+    bottom: 0px;
+    position: relative;
+
+
+
+} 
+
+.avatar_dropdown_content{
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    height: 500px;
+    background-color: #3f3e3e;
+    border-radius: 10px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    transition: .3s ease-in;
+    bottom: 0px;
+    padding: 10px auto;
+
+}
+
+.avatar_dropdown_content a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-self: center;
+    height: 50px;
+    align-items: center;
+    justify-self: center;
+    position: relative;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    transition: .3s ease-in;
+    margin-top: 20px;
+
+}
+#sign_out{
+    margin-bottom: 20px;
+}
+
+.avatar_dropdown_content a:hover{
+    background-color: #716e6e;
+}
 
 
 .lst{
@@ -354,22 +530,24 @@ body{
 
 
 // adjusting the website's media which makes the we responsive
-@media (width <= 1170px) {
-    .wrapper{
-        width: $size_when_screen_short;
-    }
-    .menuebar{
-        width:calc(100% - $size_when_screen_short);
+// @media (width <= 1170px) {
+//     .wrapper{
+//         width: $size_when_screen_short;
+//     }
+//     .menuebar{
+//         width:calc(100% - $size_when_screen_short);
 
-    }
+//     }
     
-}
+// }
 
 
 @media (width <= 850px){
+
     .webname_a_tag_sidebar{
         width: 85%;
     }
+
 
 }
 
@@ -379,11 +557,33 @@ body{
     }
 }
 
+@media (width >= 670px){
+    // .menuebar{
+    //     display: none;
+
+    // }
+    .menuebar_mobile{
+        display: none;
+    }
+}
+
 @media (width <= 670px){
     .webname_a_tag_sidebar{
         font-size: 25px;
         left: 0px;
         width: 95%;
+    }
+    .navbar_icons{
+        display: none;
+        
+    }
+    .avatar{
+        left: 65%;
+    }
+
+
+    .webname_navbar{
+        left: 15%;
     }
 }
 
@@ -397,8 +597,28 @@ body{
 }
 
 @media (width <= 570px){
+
     .webname_sidebar{
         left: 0;
         font-size: 24px;
     } 
+}
+
+@media (width <= 450px){
+    
+    .webname_sidebar_for_home_page{
+        font-size: 30px;
+    }
+}
+
+@media (width <= 350px){
+    .webname_sidebar_for_home_page{
+        font-size: 20px;
+    }
+}
+
+@media (width <= 250px){
+    .webname_sidebar_for_home_page{
+        font-size: 12px;
+    }
 }
